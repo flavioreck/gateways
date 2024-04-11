@@ -52,5 +52,5 @@ download_and_compare "https://raw.githubusercontent.com/flavioreck/gateways/main
 # If any files were updated, reboot the system
 if [ "$updated" = true ]; then
     echo "At least one file was updated. Rebooting..."
-    reboot
+    echo "Mentira..."
 fi
