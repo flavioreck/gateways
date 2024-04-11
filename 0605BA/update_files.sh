@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Get the hostname
+hostname=$(hostname)
+
+# Get the last 6 characters of the hostname
+last_six="${hostname: -6}"
+
 # Function to download a file using curl and compare its sha256sum with the existing file
 download_and_compare() {
     local url="$1"
@@ -35,13 +41,13 @@ download_and_compare() {
 updated=false
 
 # Download and compare global_conf.json
-download_and_compare "https://raw.githubusercontent.com/flavioreck/gateways/main/global_conf.json" "/user/basic_station/etc/global_conf.json"
+download_and_compare "https://raw.githubusercontent.com/flavioreck/gateways/main/$last_six/global_conf.json" "/user/basic_station/etc/global_conf.json"
 
 # Download and compare tc.key
-download_and_compare "https://raw.githubusercontent.com/flavioreck/gateways/main/tc.key" "/user/basic_station/etc/tc.key"
+download_and_compare "https://raw.githubusercontent.com/flavioreck/gateways/main/$last_six/tc.key" "/user/basic_station/etc/tc.key"
 
 # Download and compare tc.uri
-download_and_compare "https://raw.githubusercontent.com/flavioreck/gateways/main/tc.uri" "/user/basic_station/etc/tc.uri"
+download_and_compare "https://raw.githubusercontent.com/flavioreck/gateways/main/$last_six/tc.uri" "/user/basic_station/etc/tc.uri"
 
 # If any files were updated, reboot the system
 if [ "$updated" = true ]; then
